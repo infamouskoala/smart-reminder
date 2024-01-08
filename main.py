@@ -2,7 +2,7 @@ import time
 import os
 from datetime import datetime
 from src.inject import inject
-from src.notification import notification
+from src.notification import popup
 
 def alarm(reminddate, remindtime, note):
     i = 0
@@ -16,7 +16,7 @@ def alarm(reminddate, remindtime, note):
         formatted_time = current_datetime.strftime("%H:%M")
         time.sleep(1)
         if formatted_date == reminddate and formatted_time == remindtime:
-            notification("-- Reminder --", f"note: {note}\ncoded with love by github.com/infamouskoala", "src\\notification.mp3")
+            popup("-- Reminder --", f"note: {note}\ncoded with love by github.com/infamouskoala", "src\\notification.mp3")
             print(f"{note}")
             input()
             break
@@ -32,7 +32,7 @@ def start(startup):
 # CHOICES + SORTING
 
 os.system("title Reminder Maker")
-os.system("cls || clear")
+os.system("cls" if os.name == "nt" else "clear")  # Adjusting the clear command based on the operating system
 
 print("""Welcome to Reminder Maker
 This is integrated into your windows so that you can get windows pop up notifications when your reminder goes off
