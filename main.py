@@ -32,7 +32,7 @@ def start(startup):
 # CHOICES + SORTING
 
 os.system("title Reminder Maker")
-os.system("cls" if os.name == "nt" else "clear")  # Adjusting the clear command based on the operating system
+os.system("cls || clear")
 
 print("""Welcome to Reminder Maker
 This is integrated into your windows so that you can get windows pop up notifications when your reminder goes off
