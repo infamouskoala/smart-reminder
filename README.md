@@ -12,3 +12,4 @@
 ![Alt text](img/image2.png)
 ![Alt text](img/image-1.png)
 ![Alt text](img/image3.png)
+![Alt text](img/preview.png)
