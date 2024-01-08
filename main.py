@@ -1,18 +1,16 @@
 import time
-from os import system
 import os
 from datetime import datetime
 from src.inject import inject
 from src.notification import notification
-def alarm():
+
+def alarm(reminddate, remindtime, note):
     i = 0
-    file = open("reminders\\reminder.rem", "w")
-    file.write(f"date: {reminddate}\ntime: {remindtime}\nnote: {note}")
-    system("clear || cls")
+    os.system("clear || cls")
     print("Reminder is running...")
     while True:
-        print(f"Time elapsed: {i}s", end = '\r')
-        i = i+1
+        print(f"Time elapsed: {i}s", end='\r')
+        i = i + 1
         current_datetime = datetime.now()
         formatted_date = current_datetime.strftime("%d/%m/%y")
         formatted_time = current_datetime.strftime("%H:%M")
@@ -22,31 +20,29 @@ def alarm():
             print(f"{note}")
             input()
             break
-        else:
-            pass
 
-def start():
+def start(startup):
     if startup == "y":
         path = os.path.abspath(__file__)
         inject(path)
         print("Added to autostart")
     elif startup == "n":
-        print("You will have to run the script everytime u turn on ur pc.")
+        print("You will have to run the script every time you turn on your pc.")
 
 # CHOICES + SORTING
 
-system("title Reminder Maker")
-system("clear || cls")
+os.system("title Reminder Maker")
+os.system("cls" if os.name == "nt" else "clear")  # Adjusting the clear command based on the operating system
+
 print("""Welcome to Reminder Maker
 This is integrated into your windows so that you can get windows pop up notifications when your reminder goes off
 Date Layout: 00/00/00 (DD/MM/YY)
 Time Layout: HH/MM (24hr)
 """)
-remindtime = input("Time of reminder (HH:MM):  ")
+remindtime = input("Time of reminder (HH:MM): ")
 reminddate = input("Date of reminder (DD/MM/YY): ")
 note = input("Note: ")
-startup = input("Add file to startup (y/n)?")
-startup = startup.lower()
+startup = input("Add file to startup (y/n)?").lower()
 
 if startup == "y":
     inject(os.path.abspath(__file__))
@@ -56,4 +52,4 @@ else:
     print("File not added to startup.")
     time.sleep(3)
 
-alarm()
+alarm(reminddate, remindtime, note)
